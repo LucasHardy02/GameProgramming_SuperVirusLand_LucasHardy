@@ -15,6 +15,9 @@ namespace GameProgramming_SuperVirusLand_LucasHardy
         static bool gameOver = false;
 
         static Random random = new Random(); 
+        static Random randomVirusSpawn = new Random();
+
+        
 
 
         static char[,] mapArray =
@@ -35,7 +38,7 @@ namespace GameProgramming_SuperVirusLand_LucasHardy
         static void Main(string[] args)
         {
             
-
+            
 
             List<(int, int)> virusList = new List<(int, int)>();
             virusList.Add((4, 0));
@@ -46,12 +49,36 @@ namespace GameProgramming_SuperVirusLand_LucasHardy
 
             
             
+            
             while (gameOver == false)
             {
-
-
-                virusList[0] = (virusList[0].Item1 + random.Next(-2, 2), virusList[0].Item2 + random.Next(-2, 2));
                 
+
+                for (int i = 0; i < virusList.Count; i++)
+                {
+                    int x = virusList[i].Item1;
+                    int y = virusList[i].Item2;
+
+                    int newX = (x + random.Next(-1, 2));
+                    int newY = (y + random.Next(-1, 2));
+
+                    if (newX >= mapArray.GetLength(1) || newY >= mapArray.GetLength(0) || newX < 0 || newY < 0)
+                    {
+                        virusList[i] = (x, y);
+                    }
+                    else
+                    {
+                        virusList[i] = (newX, newY);
+                        
+                    }
+
+                    
+
+
+                    
+
+                }
+
 
                 for (int y = 0; y < mapArray.GetLength(0); y++)
                 {
